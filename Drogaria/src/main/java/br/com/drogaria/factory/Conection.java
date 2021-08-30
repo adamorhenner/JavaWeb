@@ -16,5 +16,6 @@ public class Conection {
 		entityManager.persist(fabricanteParaAdicionar);
 		entityManager.getTransaction().commit();
 		
+		
 	}
 }
