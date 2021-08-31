@@ -11,8 +11,11 @@ public class Conection {
 		EntityManagerFactory entidyManagerFactory = Persistence.createEntityManagerFactory("JavaWeb");
 		EntityManager entityManager = entidyManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
+		
 		Fabricante fabricanteParaAdicionar = new Fabricante();
+		
 		fabricanteParaAdicionar.setDescricao("possui 3 lojas");
+		
 		entityManager.persist(fabricanteParaAdicionar);
 		entityManager.getTransaction().commit();
 		
