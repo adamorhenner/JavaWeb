@@ -9,15 +9,15 @@ import javax.persistence.Id;
 public class Fabricante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private int codigo;
 	 
 	private String descricao;
 
-	public Long getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

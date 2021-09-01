@@ -15,7 +15,13 @@ public class FabricanteDAO {
 	public void cadastrar(Fabricante fabricante) {
 		try {
 			entityManage.getTransaction().begin();
+			
+			
+			
 			this.entityManage.persist(fabricante);
+			
+			
+			
 			entityManage.getTransaction().commit();
 			
 		} catch (Exception e) {
@@ -25,4 +31,31 @@ public class FabricanteDAO {
 			entityManage.close();
 		}
 	}
+	
+	public Fabricante buscar(int id) {
+		return entityManage.find(Fabricante.class, id);
+	}
+	
+	public void remover(int id) {
+		try {
+			entityManage.getTransaction().begin();
+			
+			
+			
+			this.entityManage.remove(entityManage.find(Fabricante.class, id));
+			
+			
+			
+			entityManage.getTransaction().commit();
+			
+		} catch (Exception e) {
+			entityManage.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			entityManage.close();
+		}
+	}
+	
+	
+	
 }

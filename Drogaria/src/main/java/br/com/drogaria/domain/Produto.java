@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private int codigo;
 	
 
 	private String descricao;
@@ -28,11 +28,11 @@ public class Produto {
 	@JoinColumn(name = "codigo_fabricante")
 	private Fabricante fabricante;
 
-	public Long getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
