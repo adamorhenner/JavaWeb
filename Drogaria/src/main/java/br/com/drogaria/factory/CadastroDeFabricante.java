@@ -1,9 +1,7 @@
 package br.com.drogaria.factory;
 
-import javax.persistence.EntityManager;
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.domain.Fabricante;
-import br.com.drogaria.util.JPAUtil;
 
 public class CadastroDeFabricante {
 	public static void main(String[] args) {
@@ -25,14 +23,14 @@ public class CadastroDeFabricante {
 //	
 //	f2.cadastrar(motorola);
 
-		EntityManager em = JPAUtil.getEntityManager();
-		FabricanteDAO dao = new FabricanteDAO(em);
-		
-		dao.remover(2);
+		FabricanteDAO dao = new FabricanteDAO();
 		
 		
 		
+		Fabricante f2 = dao.buscar(1);
+		f2.setDescricao("Xiaomi");
+		dao.atualizar(f2);
 		
-   }
 
+   }
 }

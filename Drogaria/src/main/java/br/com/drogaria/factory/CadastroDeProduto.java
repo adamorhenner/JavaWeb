@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.dao.ProdutoDAO;
+import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.domain.Produto;
 import br.com.drogaria.util.JPAUtil;
 
@@ -26,24 +27,30 @@ public class CadastroDeProduto {
 //		celular2.cadastrar(celular);
 		
 //		- DELETAR PRODUTO
-//		EntityManager em = JPAUtil.getEntityManager();
-//		ProdutoDAO dao = new ProdutoDAO(em);
-//		
-//		dao.remover(1);
-//		
-		
 		EntityManager em = JPAUtil.getEntityManager();
 		ProdutoDAO dao = new ProdutoDAO(em);
-
-		Produto pd = new Produto();
-		pd.setDescricao("cccccc");
-		pd.setPreco(990.0);
 		
-		dao.editar(pd, 5);
+		dao.remover(6);
+//		
+		
+//		EntityManager em = JPAUtil.getEntityManager();
+//		ProdutoDAO dao = new ProdutoDAO(em);
+//
+//		Produto pd = new Produto();
+//		pd.setDescricao("cccccc");
+//		pd.setPreco(990.0);
+//		
+//		dao.editar(pd, 5);
 		
 //
 //		dao.editar(pd);
 		
+		
+		
+		Produto f1 = dao.buscar(2);
+		f1.setDescricao("Nokia");
+		dao.atualizar(f1);
+
 		
 		
 		

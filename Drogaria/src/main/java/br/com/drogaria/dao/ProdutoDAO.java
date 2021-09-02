@@ -50,27 +50,27 @@ public class ProdutoDAO {
 		}
 	}
 	
-	public void editar(Produto produto, int id) {
-		try {
-			entityManage.getTransaction().begin();
-			
-			
-			Produto produtoAchado = entityManage.find(Produto.class, id);
-			produtoAchado = produto;
-			
-			entityManage.merge(produtoAchado);
-			
-			
-			
-			entityManage.getTransaction().commit();
-			
-		} catch (Exception e) {
-			entityManage.getTransaction().rollback();
-			e.printStackTrace();
-		} finally {
-			entityManage.close();
-		}
-		
+//	public void atualizar(Produto produto, int id) {
+//		try {
+//			entityManage.getTransaction().begin();
+//			
+//			
+//			Produto produtoAchado = entityManage.find(Produto.class, id);
+//			produtoAchado = produto;
+//			
+//			entityManage.merge(produtoAchado);
+//			
+//			
+//			
+//			entityManage.getTransaction().commit();
+//			
+//		} catch (Exception e) {
+//			entityManage.getTransaction().rollback();
+//			e.printStackTrace();
+//		} finally {
+//			entityManage.close();
+//		}
+//		
 	}
 }
 
