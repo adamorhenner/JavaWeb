@@ -54,6 +54,14 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.23</version>
         </dependency>
+
+
+		<!-- Prime Faces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>8.0</version>
+		</dependency>
         
         
     </dependencies>

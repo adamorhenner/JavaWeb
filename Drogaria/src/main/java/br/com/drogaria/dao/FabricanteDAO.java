@@ -58,10 +58,11 @@ public class FabricanteDAO {
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			
-			
-			
-			this.entityManage.remove(entityManage.find(Fabricante.class, id));
-			
+//			Fabricante fabricanteBuscado = this.buscar(id);
+//			this.entityManage.remove(entityManage.find(Fabricante.class, id));
+			Fabricante fabricanteBuscado = this.buscar(id);
+			this.entityManage.remove(fabricanteBuscado);
+
 			
 			
 			entityManage.getTransaction().commit();
