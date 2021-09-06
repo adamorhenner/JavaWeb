@@ -1,6 +1,10 @@
 package br.com.drogaria.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+
+import org.postgresql.core.ConnectionFactory;
 
 import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.util.JPAUtil;
@@ -96,6 +100,26 @@ public class FabricanteDAO {
 			entityManage.close();
 		}
 	}
+	
+	public List<Fabricante> listar(){
+		entityManage = JPAUtil.getEntityManager();
+
+        try {
+        String queryList = "SELECT f FROM Fabricante f ORDER BY descricao ASC";
+        List<Fabricante> fabricanteList = entityManage
+                .createQuery(queryList, Fabricante.class)
+                .getResultList();
+
+        return fabricanteList;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Erro ao listar");
+        } finally {
+            entityManage.close();
+        }
+
+        return null;
+    }
 	
 	
 }

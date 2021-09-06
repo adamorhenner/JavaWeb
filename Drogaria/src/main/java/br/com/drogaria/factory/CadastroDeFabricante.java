@@ -19,7 +19,7 @@ public class CadastroDeFabricante {
 		
 		// - Remover Item:
 		FabricanteDAO dao = new FabricanteDAO();	
-		dao.remover(5);
+		dao.listar();
 		
 		
 		
