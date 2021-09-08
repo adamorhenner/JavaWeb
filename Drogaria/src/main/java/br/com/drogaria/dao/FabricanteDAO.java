@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.postgresql.core.ConnectionFactory;
 
 import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.util.JPAUtil;
@@ -101,9 +100,29 @@ public class FabricanteDAO {
 		}
 	}
 	
-	public List<Fabricante> listar(){
-		entityManage = JPAUtil.getEntityManager();
+    public List<Fabricante> buscarPorDesc(String desc){
+    	entityManage = JPAUtil.getEntityManager();
+        try {
+        String queryList = "SELECT f FROM Fabricante f WHERE f.descricao LIKE :descricao";
+        List<Fabricante> fabricanteList = entityManage
+                .createQuery(queryList, Fabricante.class)
+                .setParameter("descricao", "%" + desc + "%")
+                .getResultList();
 
+        return fabricanteList;
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Erro na pesquisa");
+        } finally {
+            entityManage.close();
+        }
+        return null;
+    }
+
+    public List<Fabricante> listar(){
+    	entityManage = JPAUtil.getEntityManager();
+    	
         try {
         String queryList = "SELECT f FROM Fabricante f ORDER BY descricao ASC";
         List<Fabricante> fabricanteList = entityManage
