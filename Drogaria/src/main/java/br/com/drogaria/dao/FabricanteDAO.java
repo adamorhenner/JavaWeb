@@ -1,10 +1,7 @@
 package br.com.drogaria.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
-
 import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.util.JPAUtil;
 

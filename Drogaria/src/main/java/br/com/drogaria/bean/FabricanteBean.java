@@ -1,14 +1,15 @@
 package br.com.drogaria.bean;
 
 import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.ListDataModel;
 
+
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.domain.Fabricante;
+import br.com.drogaria.util.JSFUtil;
 
 @ManagedBean(name = "MBFabricante")
 @ViewScoped
@@ -33,6 +34,7 @@ public class FabricanteBean {
 			itens = new ListDataModel<Fabricante>(lista);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			JSFUtil.adicionarMensagemErro(ex.getMessage());
 		}
 	}
 	
@@ -47,10 +49,14 @@ public class FabricanteBean {
 			dao.cadastrar(fabricante);
 			
 			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
-			itens = new ListDataModel<Fabricante>(lista);			
+			itens = new ListDataModel<Fabricante>(lista);
+			
+			JSFUtil.adicionarMensagemSucesso("Fabricante Salvo Com Sucesso!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+
 		}
 		
 	}
