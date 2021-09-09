@@ -13,8 +13,8 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<h:form>
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
+		<h:form id="frmFabListagem">
+			<p:dataTable id="tblFabricantes" emptyMessage="Nenhum registro encontrado."
 							value="#{MBFabricante.itens}"
 							var="item"
 							paginator="true"
@@ -32,7 +32,9 @@
 				</p:column>
 				
 				<f:facet name="footer">
-					<p:commandButton value="Novo" onclick="PF('dlgFabNovo').show();"/>
+					<p:commandButton value="Novo" actionListener="#{MBFabricante.prepararNovo}"
+									oncomplete="PF('dlgFabNovo').show();"
+									update=":frmFabNovo:pnlFabNovo"/>
 				</f:facet>
 			</p:dataTable>
 		</h:form>
@@ -42,16 +44,20 @@
 				draggable="false"
 				resizable="false"
 				header="Fabricante - Novo"
-				modal="true" appendTo="@(body)">
+				modal="true" appendTo="@(body)"
+				>
 				
-			<h:form>
-				<h:panelGrid columns="2">
-					<p:outputLabel value="Descrição: "></p:outputLabel>
-					<p:inputText size="30" maxlength="50"/>				
+			<h:form id="frmFabNovo">
+				<h:panelGrid id="pnlFabNovo" columns="2">
+					<p:outputLabel value="Descrição: "/>
+					<p:inputText size="30" maxlength="50" value="#{MBFabricante.fabricante.descricao}" />				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Gravar"/>
-					<p:commandButton value="Cancelar" onclick="PF('dlgFabNovo').hide();"/>
+					<p:commandButton value="Gravar" actionListener="#{MBFabricante.novo}"
+									oncomplete="PF('dlgFabNovo').hide();"
+									update=":frmFabListagem:tblFabricantes"
+									/>
+					<p:commandButton value="Cancelar" onclick="PF('dlgFabNovo').hide();" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>	
