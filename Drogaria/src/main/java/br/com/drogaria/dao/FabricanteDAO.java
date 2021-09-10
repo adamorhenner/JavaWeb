@@ -3,70 +3,56 @@ package br.com.drogaria.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import br.com.drogaria.domain.Fabricante;
+import br.com.drogaria.exception.DaoException;
 import br.com.drogaria.util.JPAUtil;
 
 public class FabricanteDAO {
 
 	private EntityManager entityManage;
-	
+
 //	public FabricanteDAO(EntityManager em) {
 //	this.entityManage = em;
 //	}
-	
-	public void cadastrar(Fabricante fabricante) {
+
+	public void cadastrar(Fabricante fabricante) throws DaoException {
 		try {
-			
+
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
-			
-			
-			
+
 			this.entityManage.persist(fabricante);
-			
-			
-			
+
 			entityManage.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao cadastrar");
 		} finally {
 			entityManage.close();
 		}
 	}
-	
+
 	public Fabricante buscar(int id) {
-		try {
-			
-			entityManage = JPAUtil.getEntityManager();
-			entityManage.getTransaction().begin();
-			
-			return entityManage.find(Fabricante.class, id);
-			
-		} catch (Exception e) {
-			entityManage.getTransaction().rollback();
-			e.printStackTrace();
-		} finally {
-			entityManage.close();
-		}
-		return null;
-	}
-	
+        if (entityManage == null || !entityManage.isOpen()) {
+            entityManage = JPAUtil.getEntityManager(); /// sempre colocar nos métodos...
+        }
+        return entityManage.find(Fabricante.class, id);
+    }
+
 	public void remover(int id) {
 		try {
-			
+
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
-			
+
 //			Fabricante fabricanteBuscado = this.buscar(id);
 //			this.entityManage.remove(entityManage.find(Fabricante.class, id));
 			Fabricante fabricanteBuscado = this.buscar(id);
 			this.entityManage.remove(fabricanteBuscado);
 
-			
-			
 			entityManage.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
@@ -74,21 +60,17 @@ public class FabricanteDAO {
 			entityManage.close();
 		}
 	}
-	
+
 	public void atualizar(Fabricante fabricante) {
 		try {
-			
+
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
-			
-			
-			
-			this.entityManage.merge(fabricante);
-			
 
-			
+			this.entityManage.merge(fabricante);
+
 			entityManage.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
@@ -96,46 +78,44 @@ public class FabricanteDAO {
 			entityManage.close();
 		}
 	}
-	
-    public List<Fabricante> buscarPorDesc(String desc){
-    	entityManage = JPAUtil.getEntityManager();
-        try {
-        String queryList = "SELECT f FROM Fabricante f WHERE f.descricao LIKE :descricao";
-        List<Fabricante> fabricanteList = entityManage
-                .createQuery(queryList, Fabricante.class)
-                .setParameter("descricao", "%" + desc + "%")
-                .getResultList();
 
-        return fabricanteList;
+	public List<Fabricante> buscarPorDesc(String desc) {
+		entityManage = JPAUtil.getEntityManager();
+		entityManage.getTransaction().begin();
 
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Erro na pesquisa");
-        } finally {
-            entityManage.close();
-        }
-        return null;
-    }
+		try {
+			String queryList = "SELECT f FROM Fabricante f WHERE f.descricao LIKE :descricao";
+			List<Fabricante> fabricanteList = entityManage.createQuery(queryList, Fabricante.class)
+					.setParameter("descricao", "%" + desc + "%").getResultList();
 
-    public List<Fabricante> listar(){
-    	entityManage = JPAUtil.getEntityManager();
-    	
-        try {
-        String queryList = "SELECT f FROM Fabricante f ORDER BY descricao ASC";
-        List<Fabricante> fabricanteList = entityManage
-                .createQuery(queryList, Fabricante.class)
-                .getResultList();
+			return fabricanteList;
 
-        return fabricanteList;
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Erro ao listar");
-        } finally {
-            entityManage.close();
-        }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Erro na pesquisa");
+		} finally {
+			entityManage.close();
+		}
+		return null;
+	}
 
-        return null;
-    }
-	
-	
+	public List<Fabricante> listar() {
+
+		try {
+			entityManage = JPAUtil.getEntityManager();
+			entityManage.getTransaction().begin();
+			String queryList = "SELECT f FROM Fabricante f ORDER BY descricao ASC";
+			List<Fabricante> fabricanteList = entityManage.createQuery(queryList, Fabricante.class).getResultList();
+
+			return fabricanteList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Erro ao listar");
+		} finally {
+			entityManage.close();
+		}
+
+		return null;
+	}
+
 }

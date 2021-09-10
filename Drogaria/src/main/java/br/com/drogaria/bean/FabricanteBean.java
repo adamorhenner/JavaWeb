@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.domain.Fabricante;
+import br.com.drogaria.exception.DaoException;
 import br.com.drogaria.util.JSFUtil;
 
 @ManagedBean(name = "MBFabricante")
@@ -53,12 +54,35 @@ public class FabricanteBean {
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Salvo Com Sucesso!");
 			
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			e.printStackTrace();
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 
 		}
 		
+	}
+	
+	public void prepararExcluir() {
+		fabricante = itens.getRowData(); 
+	}
+	
+	public void excluir() {
+		try {
+			FabricanteDAO dao = new FabricanteDAO();
+			
+			
+			dao.remover(fabricante.getCodigo());
+			
+			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
+			itens = new ListDataModel<Fabricante>(lista);
+			
+			JSFUtil.adicionarMensagemSucesso("Fabricante Removido Com Sucesso!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+
+		}
 	}
 
 	public Fabricante getFabricante() {
