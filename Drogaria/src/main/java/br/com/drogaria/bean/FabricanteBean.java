@@ -84,6 +84,30 @@ public class FabricanteBean {
 
 		}
 	}
+	
+	public void prepararEditar() {
+		fabricante = itens.getRowData();
+	}
+	
+	public void editar() {
+		try {
+			FabricanteDAO dao = new FabricanteDAO();
+			
+			
+			dao.atualizar(fabricante);
+			
+			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
+			itens = new ListDataModel<Fabricante>(lista);
+			
+			JSFUtil.adicionarMensagemSucesso("Fabricante Editado Com Sucesso!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+
+		}
+	}	
+	
 
 	public Fabricante getFabricante() {
 		return fabricante;

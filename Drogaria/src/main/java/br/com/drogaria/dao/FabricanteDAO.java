@@ -35,7 +35,7 @@ public class FabricanteDAO {
 
 	public Fabricante buscar(int id) {
         if (entityManage == null || !entityManage.isOpen()) {
-            entityManage = JPAUtil.getEntityManager(); /// sempre colocar nos métodos...
+            entityManage = JPAUtil.getEntityManager();
         }
         return entityManage.find(Fabricante.class, id);
     }
