@@ -1,11 +1,10 @@
 package br.com.drogaria.bean;
 
 import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.ListDataModel;
-
 
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.domain.Fabricante;
@@ -16,23 +15,39 @@ import br.com.drogaria.util.JSFUtil;
 @ViewScoped
 public class FabricanteBean {
 	private Fabricante fabricante;
-	
-	private ListDataModel<Fabricante> itens;
+	private ArrayList<Fabricante> itens;
+	private ArrayList<Fabricante> intensFiltrados;
 
-	public ListDataModel<Fabricante> getItens() {
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public ArrayList<Fabricante> getItens() {
 		return itens;
 	}
 
-	public void setItens(ListDataModel<Fabricante> itens) {
+	public void setItens(ArrayList<Fabricante> itens) {
 		this.itens = itens;
+	}
+
+	public ArrayList<Fabricante> getIntensFiltrados() {
+		return intensFiltrados;
+	}
+
+	public void setIntensFiltrados(ArrayList<Fabricante> intensFiltrados) {
+		this.intensFiltrados = intensFiltrados;
 	}
 
 	@PostConstruct
 	public void prepararPesquisa() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
-			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
-			itens = new ListDataModel<Fabricante>(lista);
+			itens = (ArrayList<Fabricante>) dao.listar();
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			JSFUtil.adicionarMensagemErro(ex.getMessage());
@@ -49,8 +64,7 @@ public class FabricanteBean {
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.cadastrar(fabricante);
 			
-			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
-			itens = new ListDataModel<Fabricante>(lista);
+			itens = (ArrayList<Fabricante>) dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Salvo Com Sucesso!");
 			
@@ -62,9 +76,6 @@ public class FabricanteBean {
 		
 	}
 	
-	public void prepararExcluir() {
-		fabricante = itens.getRowData(); 
-	}
 	
 	public void excluir() {
 		try {
@@ -73,8 +84,7 @@ public class FabricanteBean {
 			
 			dao.remover(fabricante.getCodigo());
 			
-			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
-			itens = new ListDataModel<Fabricante>(lista);
+			itens = (ArrayList<Fabricante>) dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Removido Com Sucesso!");
 			
@@ -85,9 +95,6 @@ public class FabricanteBean {
 		}
 	}
 	
-	public void prepararEditar() {
-		fabricante = itens.getRowData();
-	}
 	
 	public void editar() {
 		try {
@@ -96,8 +103,7 @@ public class FabricanteBean {
 			
 			dao.atualizar(fabricante);
 			
-			ArrayList<Fabricante> lista = (ArrayList<Fabricante>) dao.listar();
-			itens = new ListDataModel<Fabricante>(lista);
+			itens = (ArrayList<Fabricante>) dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Editado Com Sucesso!");
 			
@@ -109,12 +115,5 @@ public class FabricanteBean {
 	}	
 	
 
-	public Fabricante getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
-	}
 
 }
