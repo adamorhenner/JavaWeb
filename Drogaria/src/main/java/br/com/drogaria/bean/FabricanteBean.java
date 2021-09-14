@@ -46,7 +46,7 @@ public class FabricanteBean {
 	public void prepararPesquisa() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
-			itens = (ArrayList<Fabricante>) dao.listar();
+			itens = dao.listar();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,7 +64,7 @@ public class FabricanteBean {
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.cadastrar(fabricante);
 			
-			itens = (ArrayList<Fabricante>) dao.listar();
+			itens = dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Salvo Com Sucesso!");
 			
@@ -84,7 +84,7 @@ public class FabricanteBean {
 			
 			dao.remover(fabricante.getCodigo());
 			
-			itens = (ArrayList<Fabricante>) dao.listar();
+			itens = dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Removido Com Sucesso!");
 			
@@ -103,7 +103,7 @@ public class FabricanteBean {
 			
 			dao.atualizar(fabricante);
 			
-			itens = (ArrayList<Fabricante>) dao.listar();
+			itens = dao.listar();
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante Editado Com Sucesso!");
 			

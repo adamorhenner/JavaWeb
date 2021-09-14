@@ -1,5 +1,6 @@
 package br.com.drogaria.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import br.com.drogaria.domain.Fabricante;
@@ -40,7 +41,7 @@ public class FabricanteDAO {
         return entityManage.find(Fabricante.class, id);
     }
 
-	public void remover(int id) {
+	public void remover(int id) throws DaoException {
 		try {
 
 			entityManage = JPAUtil.getEntityManager();
@@ -56,12 +57,13 @@ public class FabricanteDAO {
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao remover");
 		} finally {
 			entityManage.close();
 		}
 	}
 
-	public void atualizar(Fabricante fabricante) {
+	public void atualizar(Fabricante fabricante) throws DaoException {
 		try {
 
 			entityManage = JPAUtil.getEntityManager();
@@ -74,12 +76,13 @@ public class FabricanteDAO {
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao Atualizar");
 		} finally {
 			entityManage.close();
 		}
 	}
 
-	public List<Fabricante> buscarPorDesc(String desc) {
+	public List<Fabricante> buscarPorDesc(String desc) throws DaoException {
 		entityManage = JPAUtil.getEntityManager();
 		entityManage.getTransaction().begin();
 
@@ -93,29 +96,28 @@ public class FabricanteDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("Erro na pesquisa");
+			throw new DaoException("Erro 300");
 		} finally {
 			entityManage.close();
 		}
-		return null;
 	}
 
-	public List<Fabricante> listar() {
+	public ArrayList<Fabricante> listar() throws DaoException {
 
 		try {
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
-			String queryList = "SELECT f FROM Fabricante f ORDER BY descricao ASC";
+			
+			String queryList = "SELECT f FROM Fabricante f";
 			List<Fabricante> fabricanteList = entityManage.createQuery(queryList, Fabricante.class).getResultList();
-
-			return fabricanteList;
+			
+			return (ArrayList<Fabricante>) fabricanteList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("Erro ao listar");
+			throw new DaoException("Erro 301");
 		} finally {
 			entityManage.close();
-		}
-
-		return null;
+		}	
 	}
-
 }
