@@ -26,14 +26,17 @@
 					Fabricante - Listagem
 				</f:facet>
 				
-				<p:column headerText="Código" filterBy="#{item.codigo}" sortBy="#{item.codigo}" >
-					<h:outputText value="#{item.codigo}"/>
+				<p:column headerText="Código" 
+					sortBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
 				</p:column>
-				
-				<p:column headerText="Descrição" filterBy="#{item.descricao}" sortBy="#{item.descricao}">
+
+				<p:column headerText="Descrição"
+					sortBy="#{item.descricao}">
 					<h:outputText value="#{item.descricao}" />
 				</p:column>
-				
+
+
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash" 							 
 									oncomplete="PF('dlgFabExcluir').show();"
@@ -46,11 +49,7 @@
 									update=":frmFabEditar:pnlFabEditar">
 									<f:setPropertyActionListener value="#{item}" target="#{MBFabricante.fabricante}" />
 					</p:commandButton>
-				
 				</p:column>
-				
-			
-				
 				<f:facet name="footer">
 					<p:commandButton value="Novo" actionListener="#{MBFabricante.prepararNovo}"
 									oncomplete="PF('dlgFabNovo').show();"
@@ -58,7 +57,6 @@
 				</f:facet>
 			</p:dataTable>
 		</h:form>
-		
 		<p:dialog widgetVar="dlgFabNovo"
 				closable="false"
 				draggable="false"
@@ -66,7 +64,6 @@
 				header="Fabricante - Novo"
 				modal="true" appendTo="@(body)"
 				>
-				
 			<h:form id="frmFabNovo">
 				<h:panelGrid id="pnlFabNovo" columns="2">
 					<p:outputLabel value="Descrição: "/>
@@ -105,9 +102,7 @@
 					</h:panelGrid>
 				</h:form>
 		</p:dialog>
-		  
-		
-		
+				
 		<p:dialog widgetVar="dlgFabEditar"
 				closable="false"
 				draggable="false"
