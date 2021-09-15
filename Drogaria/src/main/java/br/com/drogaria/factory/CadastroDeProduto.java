@@ -6,12 +6,13 @@ import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.dao.ProdutoDAO;
 import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.domain.Produto;
+import br.com.drogaria.exception.DaoException;
 import br.com.drogaria.util.JPAUtil;
 
 
 
 public class CadastroDeProduto {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DaoException {
 		
 //		EntityManager em = JPAUtil.getEntityManager();
 //		FabricanteDAO f1 = new FabricanteDAO(em);
@@ -27,10 +28,10 @@ public class CadastroDeProduto {
 //		celular2.cadastrar(celular);
 		
 //		- DELETAR PRODUTO
-		EntityManager em = JPAUtil.getEntityManager();
-		ProdutoDAO dao = new ProdutoDAO(em);
-		
-		dao.remover(6);
+//		EntityManager em = JPAUtil.getEntityManager();
+//		ProdutoDAO dao = new ProdutoDAO(em);
+//		
+//		dao.remover(6);
 //		
 		
 //		EntityManager em = JPAUtil.getEntityManager();
@@ -47,12 +48,23 @@ public class CadastroDeProduto {
 		
 		
 		
-		Produto f1 = dao.buscar(2);
-		f1.setDescricao("Nokia");
-		dao.atualizar(f1);
+//		Produto f1 = dao.buscar(2);
+//		f1.setDescricao("Nokia");
+//		dao.atualizar(f1);
 
 		
-		
+		int a = 0;
+		int i = 1;
+
+		//- Cadastrar
+		while(a  <= 30) {
+			Produto produto = new Produto();
+			produto.setDescricao("PRODUTO " + i);
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.cadastrar(produto);
+			i++;
+			a++;
+		}
 		
 	   }
 }

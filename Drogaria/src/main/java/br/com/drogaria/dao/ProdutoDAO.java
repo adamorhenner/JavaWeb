@@ -1,18 +1,25 @@
 package br.com.drogaria.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
+import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.domain.Produto;
+import br.com.drogaria.exception.DaoException;
+import br.com.drogaria.util.JPAUtil;
 
 public class ProdutoDAO {
 	private EntityManager entityManage;
 	
-	public ProdutoDAO(EntityManager em) {
-	this.entityManage = em;
-	}
+//	public ProdutoDAO(EntityManager em) {
+//	this.entityManage = em;
+//	}
 	
-	public void cadastrar(Produto produto) {
+	public void cadastrar(Produto produto) throws DaoException {
 		try {
+			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			this.entityManage.persist(produto);
 			entityManage.getTransaction().commit();
@@ -20,6 +27,7 @@ public class ProdutoDAO {
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao cadastrar!");
 		} finally {
 			entityManage.close();
 		}
@@ -32,6 +40,7 @@ public class ProdutoDAO {
 	
 	public void remover(int id) {
 		try {
+			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			
 			
@@ -52,6 +61,7 @@ public class ProdutoDAO {
 	
 	public void atualizar(Produto produto, int id) {
 		try {
+			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			
 			
@@ -72,5 +82,36 @@ public class ProdutoDAO {
 		}
 		
 	}
+	
+	public ArrayList<Produto> listar() throws DaoException {
+
+		try {
+			entityManage = JPAUtil.getEntityManager();
+			entityManage.getTransaction().begin();
+			
+			String queryList = "select p.codigo, p.descricao, p.preco, p.quantidade, f.codigo, f.descricao from produto p inner join fabricante f on f.codigo = p.codigo_fabricante";
+			List<Produto> produtoList = entityManage.createQuery(queryList, Produto.class).getResultList();
+			
+			return (ArrayList<Produto>) produtoList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Erro ao listar");
+			throw new DaoException("Erro 301");
+		} finally {
+			entityManage.close();
+		}	
+	}
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
