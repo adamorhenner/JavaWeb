@@ -13,6 +13,8 @@
 <!--            <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 
         <!-- Classes (entidades) que serao mapeadas -->
+        
+        <class>br.com.drogaria.domain.Produto</class>
         <!-- essa parte nao precisa -->
 
 

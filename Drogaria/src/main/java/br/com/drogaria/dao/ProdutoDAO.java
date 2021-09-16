@@ -34,18 +34,22 @@ public class ProdutoDAO {
 	}
 	
 	public Produto buscar(int id) {
-		return entityManage.find(Produto.class, id);
-	}
+        if (entityManage == null || !entityManage.isOpen()) {
+            entityManage = JPAUtil.getEntityManager();
+        }
+        return entityManage.find(Produto.class, id);
+    }
 	
 	
-	public void remover(int id) {
+	public void remover(int id) throws DaoException{
 		try {
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			
 			
 			
-			this.entityManage.remove(entityManage.find(Produto.class, id));
+			Produto produtoBuscado = this.buscar(id);
+			this.entityManage.remove(produtoBuscado);
 			
 			
 			
@@ -54,33 +58,29 @@ public class ProdutoDAO {
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao Remover");
 		} finally {
 			entityManage.close();
 		}
 	}
 	
-	public void atualizar(Produto produto, int id) {
+	public void atualizar(Produto produto) throws DaoException {
 		try {
+
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
-			
-			
-			Produto produtoAchado = entityManage.find(Produto.class, id);
-			produtoAchado = produto;
-			
-			entityManage.merge(produtoAchado);
-			
-			
-			
+
+			this.entityManage.merge(produto);
+
 			entityManage.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			entityManage.getTransaction().rollback();
 			e.printStackTrace();
+			throw new DaoException("Erro ao Atualizar");
 		} finally {
 			entityManage.close();
 		}
-		
 	}
 	
 	public ArrayList<Produto> listar() throws DaoException {
@@ -89,7 +89,7 @@ public class ProdutoDAO {
 			entityManage = JPAUtil.getEntityManager();
 			entityManage.getTransaction().begin();
 			
-			String queryList = "select p.codigo, p.descricao, p.preco, p.quantidade, f.codigo, f.descricao from produto p inner join fabricante f on f.codigo = p.codigo_fabricante";
+			String queryList = "select p from Produto p inner join fetch p.fabricante f";
 			List<Produto> produtoList = entityManage.createQuery(queryList, Produto.class).getResultList();
 			
 			return (ArrayList<Produto>) produtoList;

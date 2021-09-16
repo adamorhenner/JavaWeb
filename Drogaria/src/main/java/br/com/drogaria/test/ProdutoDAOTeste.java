@@ -42,7 +42,7 @@ public class ProdutoDAOTeste {
 	}
 	
 	@Test
-	
+	@Ignore
 	public void listar() throws DaoException {
 		ProdutoDAO dao = new ProdutoDAO();
 		ArrayList<Produto> lista = dao.listar();
@@ -55,5 +55,35 @@ public class ProdutoDAOTeste {
 			System.out.println("Descrição do Fabricante: " + p.getFabricante().getDescricao());
 			System.out.println();
 		}
+	}
+	
+	
+	@Test
+	@Ignore
+	public void remover() throws DaoException {
+		Produto p = new Produto();
+		p.setCodigo(2);
+		
+		ProdutoDAO dao = new ProdutoDAO();
+		dao.remover(p.getCodigo());
+	}
+	
+	@Test
+	public void editar() throws DaoException {
+		Produto p = new Produto();
+		
+		p.setCodigo(3);
+		p.setDescricao("cataflan pomada com 60 gramas");
+		p.setPreco(15.50);
+		p.setQuantidade(150l);
+		
+		Fabricante f = new Fabricante();
+		f.setCodigo(6);
+		
+		p.setFabricante(f);
+		
+		ProdutoDAO dao = new ProdutoDAO();
+		dao.atualizar(p);
+		
 	}
 }

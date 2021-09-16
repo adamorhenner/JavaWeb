@@ -1,6 +1,7 @@
 package br.com.drogaria.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Produto {
 	
 	private Double preco;
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_fabricante")
 	private Fabricante fabricante;
 
