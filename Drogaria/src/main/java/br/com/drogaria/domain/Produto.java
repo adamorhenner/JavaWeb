@@ -27,7 +27,7 @@ public class Produto {
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_fabricante")
-	private Fabricante fabricante;
+	private Fabricante fabricante = new Fabricante();
 
 	public int getCodigo() {
 		return codigo;
