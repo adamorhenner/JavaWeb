@@ -75,5 +75,63 @@ public class ProdutoBean {
 		}
 	}
 	
+	public void novo() {
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.cadastrar(produto);
+			
+			itens = dao.listar();
+			
+			JSFUtil.adicionarMensagemSucesso("Produto salvo com sucesso.");
+	
+		} catch (DaoException ex) {
+			ex.printStackTrace();
+			JSFUtil.adicionarMensagemErro(ex.getMessage());
+		}
+	}
+	
+	public void excluir() {
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			
+			dao.remover(produto.getCodigo());
+			
+			itens = dao.listar();
+			
+			JSFUtil.adicionarMensagemSucesso("Produto removido com sucesso.");
+		} catch (DaoException ex) {
+			ex.printStackTrace();
+			JSFUtil.adicionarMensagemErro(ex.getMessage());
+		}
+		
+	}
+	
+	public void prepararEditar() {
+		try {
+			FabricanteDAO dao = new FabricanteDAO();
+			
+			comboFabricantes = dao.listar();
+						
+		} catch (DaoException ex) {
+			ex.printStackTrace();
+			JSFUtil.adicionarMensagemErro(ex.getMessage());
+		}
+	}
+	
+	public void editar() {
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			
+			dao.atualizar(produto);
+			
+			itens = dao.listar();
+			
+			JSFUtil.adicionarMensagemSucesso("Produto editado com sucesso.");
+			
+		} catch (DaoException ex) {
+			ex.printStackTrace();
+			JSFUtil.adicionarMensagemErro(ex.getMessage());
+		}
+	}
 	
 }
