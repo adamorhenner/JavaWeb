@@ -67,14 +67,17 @@
 			<h:form id="frmFabNovo">
 				<h:panelGrid id="pnlFabNovo" columns="2">
 					<p:outputLabel for="txtDescFabNovo" value="Descrição:"/>
-					<p:inputText id="txtDescFabNovo" size="30" maxlength="50" value="#{MBFabricante.fabricante.descricao}" required="true" requiredMessage="O campo descrição é obrigatorio." />				
+					<p:inputText id="txtDescFabNovo" size="30" maxlength="50" 
+					value="#{MBFabricante.fabricante.descricao}" required="true" requiredMessage="O campo descrição é obrigatorio." />				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Gravar" actionListener="#{MBFabricante.novo}"
 									oncomplete="verificar(xhr, status, args, 'dlgFabNovo', 'tabelaFabricantes');" 
 									update=":frmFabListagem:tblFabricantes :msgGlobal"
 									/>
-					<p:commandButton value="Cancelar" onclick="PF('dlgFabNovo').hide();" />
+					<p:commandButton value="Cancelar" process="@this" onclick="PF('dlgFabNovo').hide();">
+						<p:resetInput target="pnlFabNovo"/>
+					</p:commandButton>
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>	
@@ -98,7 +101,7 @@
 						<p:commandButton value="Excluir" actionListener="#{MBFabricante.excluir}"
 										oncomplete="PF('dlgFabExcluir').hide();"
 										update=":frmFabListagem:tblFabricantes :msgGlobal"/>
-						<p:commandButton value="Cancelar" onclick="PF('dlgFabExcluir').hide();"/>
+						<p:commandButton value="Cancelar" process="@this" onclick="PF('dlgFabExcluir').hide();"/>
 					</h:panelGrid>
 				</h:form>
 		</p:dialog>
@@ -124,7 +127,9 @@
 					<p:commandButton value="Editar" actionListener="#{MBFabricante.editar}"
 									oncomplete="verificar(xhr, status, args, 'dlgFabEditar', 'tabelaFabricantes')"
 									update=":frmFabListagem:tblFabricantes  :msgGlobal"/>
-					<p:commandButton value="Cancelar" onclick="PF('dlgFabEditar').hide();"/>
+					<p:commandButton value="Cancelar" process="@this" onclick="PF('dlgFabEditar').hide();">
+						<p:resetInput target="pnlFabEditar"/>
+					</p:commandButton>
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>

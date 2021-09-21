@@ -83,6 +83,7 @@ public class ProdutoDAO {
 	}
 	
 	public ArrayList<Produto> listar() throws DaoException {
+		List<Produto> produtos = new ArrayList<Produto>();
 
 		try {
 			entityManage = JPAUtil.getEntityManager();
@@ -91,7 +92,9 @@ public class ProdutoDAO {
 			String queryList = "select p from Produto p inner join fetch p.fabricante f";
 			List<Produto> produtoList = entityManage.createQuery(queryList, Produto.class).getResultList();
 			
-			return (ArrayList<Produto>) produtoList;
+			
+			produtos.addAll(produtoList);
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("Erro ao listar");
@@ -99,6 +102,9 @@ public class ProdutoDAO {
 		} finally {
 			entityManage.close();
 		}	
+		
+		return (ArrayList<Produto>) produtos;
+
 	}
 	
 

@@ -52,8 +52,8 @@ public class ProdutoBean {
 	
 	public void carregarListagem() {
 		try {
-		ProdutoDAO dao = new ProdutoDAO();
-		itens = dao.listar();
+			ProdutoDAO dao = new ProdutoDAO();
+			itens = dao.listar();
 		
 		
 		} catch (Exception ex) {

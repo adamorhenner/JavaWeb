@@ -20,7 +20,7 @@ public class Produto {
 	private String descricao;
 	
 	
-	private Long quantidade;
+	private int quantidade;
 	
 	
 	private Double preco;
@@ -45,11 +45,11 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public Long getQuantidade() {
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Long quantidade) {
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 
