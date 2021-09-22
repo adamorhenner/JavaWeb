@@ -167,7 +167,7 @@
 								required="true" requiredMessage="O campo Preço é obrigatorio."
 								validatorMessage="Informe um valor entre 0,00 e 9999,99 para o campo preço.">
 						<f:convertNumber pattern="0.00"/>
-						<f:validateLongRange minimum="0.00" maximum="9999.99"/>
+						<f:validateDoubleRange  minimum="0.00" maximum="9999.99"/>
 					</p:inputText>
 					
 					<p:outputLabel for="txtQtdeProdEditar" value="Quantidade:"/>

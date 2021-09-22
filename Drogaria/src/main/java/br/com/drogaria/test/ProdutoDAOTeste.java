@@ -17,7 +17,7 @@ public class ProdutoDAOTeste {
 		Produto p = new Produto();
 		p.setDescricao("Novalgina com 10 comprimidos");
 		p.setPreco(2.50);
-		p.setQuantidade(13l);
+		p.setQuantidade(13);
 		
 		Fabricante f = new Fabricante();
 		f.setCodigo(65);
@@ -75,7 +75,7 @@ public class ProdutoDAOTeste {
 		p.setCodigo(3);
 		p.setDescricao("cataflan pomada com 60 gramas");
 		p.setPreco(15.50);
-		p.setQuantidade(150l);
+		p.setQuantidade(150);
 		
 		Fabricante f = new Fabricante();
 		f.setCodigo(6);
