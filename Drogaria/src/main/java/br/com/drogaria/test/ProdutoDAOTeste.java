@@ -26,19 +26,6 @@ public class ProdutoDAOTeste {
 		
 		ProdutoDAO dao = new ProdutoDAO();
 		dao.cadastrar(p);
-		
-//		int a = 0;
-//		int i = 1;
-//
-//		//- Cadastrar
-//		while(a  <= 4) {
-//			Produto produto = new Produto();
-//			produto.setDescricao("PRODUTO " + i);
-//			ProdutoDAO daoP = new ProdutoDAO();
-//			daoP.cadastrar(produto);
-//			i++;
-//			a++;
-//		}
 	}
 	
 	@Test
