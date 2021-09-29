@@ -21,11 +21,17 @@
         <!-- Configuracoes de conexao ao banco de dados e do Hibernate/EclipseLink -->
         <properties>
             <!-- Configuracoes do banco de dados -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-174-172-218.compute-1.amazonaws.com/d1d0rgd7pthhbl" />
+           <!--   <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-174-172-218.compute-1.amazonaws.com/d1d0rgd7pthhbl" />
             <property name="javax.persistence.jdbc.user" value="ovogvsiwzwdzsw" />
             <property name="javax.persistence.jdbc.password" value="1df2eecbf97a4848011f6cb75a0aaed4fbcfc9c6f009b8d8c372d260cd0d7b56" />
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />   -->
 
+            <!-- Configuracoes do banco de dados -->
+      		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-18-214-214-252.compute-1.amazonaws.com/d65rhs8hmfkhir" />
+            <property name="javax.persistence.jdbc.user" value="yudoaapvadyxci" />
+            <property name="javax.persistence.jdbc.password" value="1fd51e43ecc95e89e8d7d19ba036778e43a6b57f22bde16f1bafb2a6b68f5b54" />
+           <!-- <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />   -->
+            
             <!-- Configuracoes do Hibernate (os parametros so sao reconhecidos se estiver usando a implementacao do Hibernate)-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.show_sql" value="true" />
