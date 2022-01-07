@@ -27,9 +27,9 @@
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />   -->
 
             <!-- Configuracoes do banco de dados -->
-      		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-18-214-214-252.compute-1.amazonaws.com/d65rhs8hmfkhir" />
-            <property name="javax.persistence.jdbc.user" value="yudoaapvadyxci" />
-            <property name="javax.persistence.jdbc.password" value="1fd51e43ecc95e89e8d7d19ba036778e43a6b57f22bde16f1bafb2a6b68f5b54" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/JavaWeb" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="123456" />
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             
             <!-- Configuracoes do Hibernate (os parametros so sao reconhecidos se estiver usando a implementacao do Hibernate)-->
