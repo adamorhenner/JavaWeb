@@ -4,3 +4,4 @@ This project uses these tools:
 - PRIMEFACES v8.0
 - JPA
 - Tomcat v9.0
+- Maven
